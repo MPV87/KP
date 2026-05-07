@@ -18,7 +18,9 @@
       --success: #0f766e;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -40,10 +42,19 @@
       padding-top: 8px;
     }
 
-    .logo-wrap img {
-      max-width: 430px;
-      width: 100%;
-      height: auto;
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 14px 24px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      font-size: 22px;
     }
 
     .form-card {
@@ -52,7 +63,7 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 18px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.09);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.09);
       overflow: hidden;
     }
 
@@ -61,16 +72,26 @@
       border-top: 1px solid #ececea;
     }
 
-    .section:first-child { border-top: 0; }
+    .section:first-child {
+      border-top: 0;
+    }
 
-    h1, h2 {
+    h1,
+    h2 {
       margin: 0;
       color: var(--text);
       line-height: 1.2;
     }
 
-    h1 { font-size: 34px; letter-spacing: -0.02em; }
-    h2 { font-size: 23px; letter-spacing: -0.01em; }
+    h1 {
+      font-size: 34px;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 23px;
+      letter-spacing: -0.01em;
+    }
 
     .intro {
       margin: 10px 0 0;
@@ -83,18 +104,28 @@
       gap: 18px;
     }
 
-    .field { margin-top: 18px; }
-    .field.full { grid-column: 1 / -1; }
+    .field {
+      margin-top: 18px;
+    }
 
-    label, .label {
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label,
+    .label {
       display: block;
       margin-bottom: 8px;
       font-weight: 700;
     }
 
-    .required { color: #d93025; }
+    .required {
+      color: #d93025;
+    }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
       min-height: 46px;
       border: 1px solid var(--border);
@@ -110,8 +141,10 @@
       resize: vertical;
     }
 
-    input:focus, select:focus, textarea:focus {
-      outline: 3px solid rgba(46,105,255,0.18);
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 3px solid rgba(31, 41, 51, 0.16);
       border-color: var(--accent);
     }
 
@@ -123,20 +156,23 @@
       font-weight: 400;
     }
 
-    .radio-group, .checkbox-group {
+    .radio-group,
+    .checkbox-group {
       display: grid;
       gap: 10px;
       margin-top: 8px;
     }
 
-    .radio-item, .checkbox-item {
+    .radio-item,
+    .checkbox-item {
       display: flex;
       align-items: flex-start;
       gap: 10px;
       font-weight: 400;
     }
 
-    .radio-item input, .checkbox-item input {
+    .radio-item input,
+    .checkbox-item input {
       width: auto;
       min-height: auto;
       margin-top: 5px;
@@ -156,6 +192,11 @@
       font-size: 15px;
     }
 
+    a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
     .actions {
       padding: 26px 38px 34px;
     }
@@ -172,8 +213,14 @@
       cursor: pointer;
     }
 
-    button:hover { background: var(--accent-hover); }
-    button:disabled { opacity: .65; cursor: not-allowed; }
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
 
     .status {
       display: none;
@@ -186,13 +233,13 @@
     .status.success {
       display: block;
       color: var(--success);
-      background: rgba(15,118,110,.1);
+      background: rgba(15, 118, 110, 0.1);
     }
 
     .status.error {
       display: block;
       color: var(--error);
-      background: rgba(185,28,28,.1);
+      background: rgba(185, 28, 28, 0.1);
     }
 
     .hidden-field {
@@ -204,17 +251,30 @@
     }
 
     @media (max-width: 700px) {
-      .section, .actions { padding-left: 22px; padding-right: 22px; }
-      .grid { grid-template-columns: 1fr; }
-      h1 { font-size: 28px; }
-      h2 { font-size: 22px; }
+      .section,
+      .actions {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <div class="logo-wrap">
-      <img src="https://www.jotform.com/uploads/anjawunderer/form_files/Powermatic%20service.69957e83a53ab7.63008672.png" alt="Zorr Powermatic Service" />
+      <div class="logo-mark">Zorr Powermatic Service</div>
     </div>
 
     <form id="returnForm" class="form-card" enctype="multipart/form-data">
@@ -298,9 +358,7 @@
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic II+" /> Zorr Powermatic II+</label>
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+" /> Zorr Powermatic III+</label>
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+ Deluxe" /> Zorr Powermatic III+ Deluxe</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+" /> Zorr Powermatic III+</label>
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic IV+" /> Zorr Powermatic IV+</label>
-            
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V+" /> Zorr Powermatic V+</label>
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V+ Deluxe" /> Zorr Powermatic V+ Deluxe</label>
           </div>
@@ -418,7 +476,7 @@
   </main>
 
   <script>
-    const FORM_ENDPOINT = "/.netlify/functions/send-form.js";
+    const FORM_ENDPOINT = "/.netlify/functions/send-form";
 
     const form = document.getElementById("returnForm");
     const button = document.getElementById("submitButton");
