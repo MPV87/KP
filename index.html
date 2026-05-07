@@ -238,7 +238,7 @@
     // Diese HTML-Datei sendet die Formulardaten an ein sicheres Backend.
     // Der Brevo API-Key darf NICHT direkt in dieser HTML-Datei stehen.
     // Trage hier die URL deines Backends ein, z. B. eine Netlify Function, Vercel Function oder ein PHP-Script am Server.
-    const FORM_ENDPOINT = "https://DEINE-DOMAIN.at/api/send-form";
+    const FORM_ENDPOINT = "/.netlify/functions/send-form";
 
     const form = document.getElementById("contactForm");
     const button = document.getElementById("submitButton");
