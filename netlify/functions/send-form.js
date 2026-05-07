@@ -57,7 +57,7 @@ exports.handler = async function (event) {
 
     for (const field of requiredFields) {
       if (!String(fields[field] || "").trim()) {
-        return response(400, { message: "Bitte alle Pflichtfelder ausfüllen." });
+        return response(400, { message: "Fehlendes Pflichtfeld: " + field });
       }
     }
 
