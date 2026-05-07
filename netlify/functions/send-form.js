@@ -13,9 +13,10 @@ exports.handler = async function (event) {
   }
 
   const brevoApiKey = process.env.BREVO_API_KEY;
-  const recipientEmail = process.env.FORM_RECIPIENT_EMAIL || "office@kp-plattner.at";
+  const recipientEmail = process.env.FORM_RECIPIENT_EMAIL || "info@mp-vision.at";
 
   if (!brevoApiKey) {
+    console.error("BREVO_API_KEY fehlt.");
     return response(500, { message: "Brevo API Key fehlt." });
   }
 
@@ -23,7 +24,7 @@ exports.handler = async function (event) {
     const contentType = event.headers["content-type"] || event.headers["Content-Type"] || "";
 
     if (!contentType.includes("multipart/form-data")) {
-      return response(400, { message: "Ungültiger Formulartyp." });
+      return response(400, { message: "Ungültiger Formulartyp. Erwartet wird multipart/form-data." });
     }
 
     const parsed = parseMultipartForm(event.body, contentType, event.isBase64Encoded);
@@ -122,18 +123,19 @@ exports.handler = async function (event) {
     if (!brevoResponse.ok) {
       const errorText = await brevoResponse.text();
       console.error("Brevo Fehler:", errorText);
-      return response(502, { message: "E-Mail konnte nicht versendet werden." });
+      return response(502, { message: "Brevo Fehler: " + errorText });
     }
 
     return response(200, { message: "Formular erfolgreich gesendet." });
   } catch (error) {
     console.error("Serverfehler:", error);
-    return response(500, { message: "Serverfehler beim Versand." });
+    return response(500, { message: "Serverfehler: " + error.message });
   }
 };
 
 function parseMultipartForm(body, contentType, isBase64Encoded) {
   const boundaryMatch = contentType.match(/boundary=(?:"([^"]+)"|([^;]+))/i);
+
   if (!boundaryMatch) {
     throw new Error("Multipart boundary fehlt.");
   }
