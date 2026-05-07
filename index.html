@@ -296,11 +296,13 @@
           <div class="radio-group">
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic I+ Elite" required /> Zorr Powermatic I+ Elite</label>
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic II+" /> Zorr Powermatic II+</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III-S+" /> Zorr Powermatic III-S+</label>
+            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+" /> Zorr Powermatic III+</label>
+            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+ Deluxe" /> Zorr Powermatic III+ Deluxe</label>
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+" /> Zorr Powermatic III+</label>
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic IV+" /> Zorr Powermatic IV+</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V" /> Zorr Powermatic V</label>
+            
             <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V+" /> Zorr Powermatic V+</label>
+            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V+ Deluxe" /> Zorr Powermatic V+ Deluxe</label>
           </div>
         </div>
 
@@ -416,7 +418,7 @@
   </main>
 
   <script>
-    const FORM_ENDPOINT = "https://www.kp-plattner.at/data/send-form.php";
+    const FORM_ENDPOINT = "/.netlify/functions/send-form.js";
 
     const form = document.getElementById("returnForm");
     const button = document.getElementById("submitButton");
