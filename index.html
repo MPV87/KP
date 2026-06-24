@@ -5,538 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zorr Powermatic Retoure</title>
   <style>
-    :root {
-      --bg: #f5f5f3;
-      --card: #ffffff;
-      --text: #1f2933;
-      --muted: #6b7280;
-      --border: #d9d9d6;
-      --accent: #1f2933;
-      --accent-hover: #374151;
-      --soft: #f7f7f5;
-      --error: #b91c1c;
-      --success: #0f766e;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #ffffff 0%, var(--bg) 260px);
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    .page {
-      min-height: 100vh;
-      padding: 32px 16px;
-    }
-
-    .logo-wrap {
-      max-width: 752px;
-      margin: 0 auto 28px;
-      text-align: center;
-      padding-top: 8px;
-    }
-
-    .logo-mark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 58px;
-      padding: 14px 24px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: #fff;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      font-size: 22px;
-    }
-
-    .form-card {
-      max-width: 752px;
-      margin: 0 auto;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.09);
-      overflow: hidden;
-    }
-
-    .section {
-      padding: 30px 38px;
-      border-top: 1px solid #ececea;
-    }
-
-    .section:first-child {
-      border-top: 0;
-    }
-
-    h1,
-    h2 {
-      margin: 0;
-      color: var(--text);
-      line-height: 1.2;
-    }
-
-    h1 {
-      font-size: 34px;
-      letter-spacing: -0.02em;
-    }
-
-    h2 {
-      font-size: 23px;
-      letter-spacing: -0.01em;
-    }
-
-    .intro {
-      margin: 10px 0 0;
-      color: var(--muted);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .field {
-      margin-top: 18px;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    label,
-    .label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .required {
-      color: #d93025;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      min-height: 46px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 12px;
-      font: inherit;
-      color: var(--text);
-      background: #fff;
-    }
-
-    textarea {
-      min-height: 160px;
-      resize: vertical;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: 3px solid rgba(31, 41, 51, 0.16);
-      border-color: var(--accent);
-    }
-
-    .sub-label {
-      display: block;
-      margin-top: 5px;
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    .radio-group,
-    .checkbox-group {
-      display: grid;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .radio-item,
-    .checkbox-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-weight: 400;
-    }
-
-    .radio-item input,
-    .checkbox-item input {
-      width: auto;
-      min-height: auto;
-      margin-top: 5px;
-    }
-
-    .hint {
-      margin: 8px 0 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .notice {
-      padding: 16px;
-      background: var(--soft);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 15px;
-    }
-
-    a {
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .actions {
-      padding: 26px 38px 34px;
-    }
-
-    button {
-      min-width: 180px;
-      border: 0;
-      border-radius: 12px;
-      padding: 13px 22px;
-      background: var(--accent);
-      color: #fff;
-      font: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: var(--accent-hover);
-    }
-
-    button:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-    }
-
-    .status {
-      display: none;
-      margin-top: 16px;
-      padding: 12px 14px;
-      border-radius: 6px;
-      font-weight: 700;
-    }
-
-    .status.success {
-      display: block;
-      color: var(--success);
-      background: rgba(15, 118, 110, 0.1);
-    }
-
-    .status.error {
-      display: block;
-      color: var(--error);
-      background: rgba(185, 28, 28, 0.1);
-    }
-
-    .hidden-field {
-      position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
-
-    @media (max-width: 700px) {
-      .section,
-      .actions {
-        padding-left: 22px;
-        padding-right: 22px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      h2 {
-        font-size: 22px;
-      }
-    }
+    :root{--bg:#f5f5f3;--card:#fff;--text:#1f2933;--muted:#6b7280;--border:#d9d9d6;--accent:#1f2933;--accent-hover:#374151;--error:#b91c1c;--success:#0f766e}*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#fff 0%,var(--bg) 260px);color:var(--text);line-height:1.5}.page{min-height:100vh;padding:32px 16px}.language-bar{max-width:752px;margin:0 auto 18px;display:flex;justify-content:flex-end;align-items:center;gap:10px}.language-bar label{margin:0;font-size:14px;font-weight:700;color:var(--muted)}.language-bar select{width:auto;min-height:38px;border-radius:999px;padding:7px 34px 7px 12px;font-weight:700}.logo-wrap{max-width:752px;margin:0 auto 28px;text-align:center;padding-top:8px}.logo-wrap img{max-width:420px;width:100%;height:auto;display:inline-block}.form-card{max-width:752px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.09);overflow:hidden}.section{padding:30px 38px;border-top:1px solid #ececea}.section:first-child{border-top:0}h1,h2{margin:0;color:var(--text);line-height:1.2}h1{font-size:34px;letter-spacing:-.02em}h2{font-size:23px;letter-spacing:-.01em}.intro{margin:10px 0 0;color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{margin-top:18px}.field.full{grid-column:1/-1}label,.label{display:block;margin-bottom:8px;font-weight:700}.required{color:#d93025}input,select,textarea{width:100%;min-height:46px;border:1px solid var(--border);border-radius:10px;padding:10px 12px;font:inherit;color:var(--text);background:#fff}textarea{min-height:160px;resize:vertical}input:focus,select:focus,textarea:focus{outline:3px solid rgba(31,41,51,.16);border-color:var(--accent)}.sub-label{display:block;margin-top:5px;font-size:13px;color:var(--muted);font-weight:400}.radio-group,.checkbox-group{display:grid;gap:10px;margin-top:8px}.radio-item,.checkbox-item{display:flex;align-items:flex-start;gap:10px;font-weight:400}.radio-item input,.checkbox-item input{width:auto;min-height:auto;margin-top:5px}.hint{margin:8px 0 0;font-size:13px;color:var(--muted)}.serial-image{display:block;margin-top:10px;max-width:260px;width:100%;border-radius:10px;border:1px solid var(--border)}a{color:var(--accent);font-weight:700}.actions{padding:26px 38px 34px}button{min-width:180px;border:0;border-radius:12px;padding:13px 22px;background:var(--accent);color:#fff;font:inherit;font-weight:700;cursor:pointer}button:hover{background:var(--accent-hover)}button:disabled{opacity:.65;cursor:not-allowed}.status{display:none;margin-top:16px;padding:12px 14px;border-radius:6px;font-weight:700}.status.success{display:block;color:var(--success);background:rgba(15,118,110,.1)}.status.error{display:block;color:var(--error);background:rgba(185,28,28,.1)}.hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}@media(max-width:700px){.language-bar{justify-content:center}.section,.actions{padding-left:22px;padding-right:22px}.grid{grid-template-columns:1fr}h1{font-size:28px}h2{font-size:22px}}
   </style>
 </head>
 <body>
   <main class="page">
-    <div class="logo-wrap">
-      <div class="logo-mark">Zorr Powermatic Service</div>
-    </div>
-
+    <div class="language-bar"><label for="languageSelect" data-i18n="languageLabel">Sprache</label><select id="languageSelect"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option><option value="nl">NL</option></select></div>
+    <div class="logo-wrap"><img src="/images/Zorr-Powermatic-Logo.png" alt="Zorr Powermatic" /></div>
     <form id="returnForm" class="form-card" enctype="multipart/form-data">
-      <section class="section">
-        <h1>Zorr Powermatic Retoure</h1>
-        <p class="intro">Bitte füllen Sie das Formular vollständig aus. Die Angaben helfen uns bei der schnellen Bearbeitung Ihrer Reparatur oder Retoure.</p>
-      </section>
-
-      <section class="section">
-        <h2>Kundeninformation</h2>
-
-        <div class="grid">
-          <div class="field">
-            <label for="customerNumber">Kundennummer</label>
-            <input id="customerNumber" name="customerNumber" type="text" autocomplete="off" />
-          </div>
-
-          <div class="field">
-            <label for="company">Firma</label>
-            <input id="company" name="company" type="text" autocomplete="organization" />
-          </div>
-
-          <div class="field">
-            <label for="firstName">Vorname <span class="required">*</span></label>
-            <input id="firstName" name="firstName" type="text" autocomplete="given-name" required />
-          </div>
-
-          <div class="field">
-            <label for="lastName">Nachname <span class="required">*</span></label>
-            <input id="lastName" name="lastName" type="text" autocomplete="family-name" required />
-          </div>
-
-          <div class="field full">
-            <label for="street">Straße und Hausnummer <span class="required">*</span></label>
-            <input id="street" name="street" type="text" autocomplete="address-line1" required />
-          </div>
-
-          <div class="field">
-            <label for="postalCode">PLZ <span class="required">*</span></label>
-            <input id="postalCode" name="postalCode" type="text" autocomplete="postal-code" required />
-          </div>
-
-          <div class="field">
-            <label for="city">Stadt <span class="required">*</span></label>
-            <input id="city" name="city" type="text" autocomplete="address-level2" required />
-          </div>
-
-          <div class="field">
-            <label for="country">Land <span class="required">*</span></label>
-            <select id="country" name="country" autocomplete="country-name" required>
-              <option value="">Bitte auswählen</option>
-              <option value="Österreich">Österreich</option>
-              <option value="Deutschland">Deutschland</option>
-              <option value="Schweiz">Schweiz</option>
-              <option value="Italien">Italien</option>
-              <option value="Andere">Andere</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="phone">Telefonnummer <span class="required">*</span></label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" required />
-            <span class="sub-label">inkl. Landesvorwahl, z. B. +43 ...</span>
-          </div>
-
-          <div class="field full">
-            <label for="email">E-Mail <span class="required">*</span></label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
-            <span class="sub-label">beispiel@beispiel.de</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Informationen zur Maschine</h2>
-
-        <div class="field">
-          <span class="label">Um welche Maschine handelt es sich? <span class="required">*</span></span>
-          <div class="radio-group">
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic I+ Elite" required /> Zorr Powermatic I+ Elite</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic II+" /> Zorr Powermatic II+</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+" /> Zorr Powermatic III+</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+ Deluxe" /> Zorr Powermatic III+ Deluxe</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic IV+" /> Zorr Powermatic IV+</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V+" /> Zorr Powermatic V+</label>
-            <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V+ Deluxe" /> Zorr Powermatic V+ Deluxe</label>
-          </div>
-        </div>
-
-        <div class="grid">
-          <div class="field">
-            <label for="serialNumber">Seriennummer <span class="required">*</span></label>
-            <input id="serialNumber" name="serialNumber" type="text" required />
-            <span class="sub-label">auf der Unterseite der Maschine</span>
-          </div>
-
-          <div class="field">
-            <label for="purchaseDate">Kaufdatum</label>
-            <input id="purchaseDate" name="purchaseDate" type="date" />
-          </div>
-
-          <div class="field full">
-            <label for="purchaseDocument">Kaufbeleg / Garantieschein</label>
-            <input id="purchaseDocument" name="purchaseDocument" type="file" accept=".pdf,.jpg,.jpeg,.png" />
-            <p class="hint">Erlaubt: PDF, JPG, PNG. Maximal 5 MB.</p>
-          </div>
-
-          <div class="field full">
-            <label for="problemDescription">Beschreiben Sie das Problem ausführlich. <span class="required">*</span></label>
-            <textarea id="problemDescription" name="problemDescription" required></textarea>
-          </div>
-
-          <div class="field">
-            <label for="previousRepair">Wurde die Maschine in der Vergangenheit zur Reparatur eingeschickt? <span class="required">*</span></label>
-            <select id="previousRepair" name="previousRepair" required>
-              <option value="">Bitte auswählen</option>
-              <option value="Ja">Ja</option>
-              <option value="Nein">Nein</option>
-            </select>
-          </div>
-
-          <div class="field full">
-            <label for="previousRepairDate">Wenn ja, wann?</label>
-            <input id="previousRepairDate" name="previousRepairDate" type="date" />
-          </div>
-
-          <div class="field full">
-            <label for="repairDocument">Reparaturbeleg</label>
-            <input id="repairDocument" name="repairDocument" type="file" accept=".pdf,.jpg,.jpeg,.png" />
-            <p class="hint">Erlaubt: PDF, JPG, PNG. Maximal 5 MB.</p>
-          </div>
-
-          <div class="field full">
-            <label for="sameProblem">Handelt es sich um dasselbe Problem? <span class="required">*</span></label>
-            <select id="sameProblem" name="sameProblem" required>
-              <option value="">Bitte auswählen</option>
-              <option value="Ja">Ja</option>
-              <option value="Nein">Nein</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Abwicklung der Reparatur</h2>
-
-        <div class="grid">
-          <div class="field full">
-            <label for="repairApprovalAmount">Bis zu welchem Betrag können Reparaturen ohne erneute Freigabe durchgeführt werden? <span class="required">*</span></label>
-            <input id="repairApprovalAmount" name="repairApprovalAmount" type="text" placeholder="z. B. 100 €" required />
-            <span class="sub-label">außerhalb der Garantie</span>
-          </div>
-
-          <div class="field full">
-            <label for="ifExceeded">Bei Überschreitung dieses Betrags bitte ich um: <span class="required">*</span></label>
-            <select id="ifExceeded" name="ifExceeded" required>
-              <option value="">Bitte auswählen</option>
-              <option value="Erstellung eines Kostenvoranschlags">Erstellung eines Kostenvoranschlags</option>
-              <option value="Rücksendung des nicht reparierten Produkts">Rücksendung des nicht reparierten Produkts</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="checkbox-group field">
-          <label class="checkbox-item">
-            <input type="checkbox" name="sealConsent" value="Ja" required />
-            <span>Ich bin damit einverstanden, dass bei einem Siegelbruch oder einem Eingriff durch nicht autorisierte Dritte die vollständigen Reparatur- und Servicekosten anfallen, auch wenn sich die Maschine noch innerhalb des Gewährleistungszeitraums befindet. <span class="required">*</span></span>
-          </label>
-
-          <label class="checkbox-item">
-            <input type="checkbox" name="privacyConsent" value="Ja" required />
-            <span>Ich habe die <a href="https://www.smokedeals24.com/policies/privacy-policy" target="_blank" rel="noopener">Informationen zum Datenschutz</a> gelesen und bin damit einverstanden. Mir ist bekannt, dass ich der Verwendung meiner Daten jederzeit widersprechen kann. <span class="required">*</span></span>
-          </label>
-        </div>
-      </section>
-
-      <div class="hidden-field">
-        <label for="website">Bitte leer lassen</label>
-        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
-      </div>
-
-      <section class="actions">
-        <button id="submitButton" type="submit">Absenden</button>
-        <div id="status" class="status" role="status" aria-live="polite"></div>
-      </section>
+      <input type="hidden" id="formLanguage" name="formLanguage" value="DE" />
+      <input type="hidden" name="serviceFeeConsent" value="Nicht abgefragt" />
+      <section class="section"><h1 data-i18n="title">Zorr Powermatic Retoure</h1><p class="intro" data-i18n="intro">Bitte füllen Sie das Formular vollständig aus. Die Angaben helfen uns bei der schnellen Bearbeitung Ihrer Reparatur oder Retoure.</p></section>
+      <section class="section"><h2 data-i18n="customerSection">Kundeninformation</h2><div class="grid">
+        <div class="field"><label for="customerNumber" data-i18n="customerNumber">Kundennummer</label><input id="customerNumber" name="customerNumber" type="text" autocomplete="off" /></div>
+        <div class="field"><label for="company" data-i18n="company">Firma</label><input id="company" name="company" type="text" autocomplete="organization" /></div>
+        <div class="field"><label for="firstName"><span data-i18n="firstName">Vorname</span> <span class="required">*</span></label><input id="firstName" name="firstName" type="text" autocomplete="given-name" required /></div>
+        <div class="field"><label for="lastName"><span data-i18n="lastName">Nachname</span> <span class="required">*</span></label><input id="lastName" name="lastName" type="text" autocomplete="family-name" required /></div>
+        <div class="field full"><label for="street"><span data-i18n="street">Straße und Hausnummer</span> <span class="required">*</span></label><input id="street" name="street" type="text" autocomplete="address-line1" required /></div>
+        <div class="field"><label for="postalCode"><span data-i18n="postalCode">PLZ</span> <span class="required">*</span></label><input id="postalCode" name="postalCode" type="text" autocomplete="postal-code" required /></div>
+        <div class="field"><label for="city"><span data-i18n="city">Stadt</span> <span class="required">*</span></label><input id="city" name="city" type="text" autocomplete="address-level2" required /></div>
+        <div class="field"><label for="country"><span data-i18n="country">Land</span> <span class="required">*</span></label><select id="country" name="country" autocomplete="country-name" required><option value="" data-i18n="choose">Bitte auswählen</option><option value="Österreich" data-i18n="austria">Österreich</option><option value="Deutschland" data-i18n="germany">Deutschland</option><option value="Schweiz" data-i18n="switzerland">Schweiz</option><option value="Italien" data-i18n="italy">Italien</option><option value="Andere" data-i18n="other">Andere</option></select></div>
+        <div class="field"><label for="phone"><span data-i18n="phone">Telefonnummer</span> <span class="required">*</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" required /><span class="sub-label" data-i18n="phoneHint">inkl. Landesvorwahl, z. B. +43 ...</span></div>
+        <div class="field full"><label for="email"><span data-i18n="email">E-Mail</span> <span class="required">*</span></label><input id="email" name="email" type="email" autocomplete="email" required /><span class="sub-label" data-i18n="emailHint">beispiel@beispiel.de</span></div>
+      </div></section>
+      <section class="section"><h2 data-i18n="machineSection">Informationen zur Maschine</h2><div class="field"><span class="label"><span data-i18n="machineQuestion">Um welche Maschine handelt es sich?</span> <span class="required">*</span></span><div class="radio-group">
+        <label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic I+ Elite" required /> Zorr Powermatic I+ Elite</label><label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic II+" /> Zorr Powermatic II+</label><label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+" /> Zorr Powermatic III+</label><label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic III+ Deluxe" /> Zorr Powermatic III+ Deluxe</label><label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic IV+" /> Zorr Powermatic IV+</label><label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V+" /> Zorr Powermatic V+</label><label class="radio-item"><input type="radio" name="machine" value="Zorr Powermatic V+ Deluxe" /> Zorr Powermatic V+ Deluxe</label>
+      </div></div><div class="grid">
+        <div class="field"><label for="serialNumber"><span data-i18n="serialNumber">Seriennummer</span> <span class="required">*</span></label><input id="serialNumber" name="serialNumber" type="text" required /><span class="sub-label" data-i18n="serialHint">auf der Unterseite der Maschine</span><img class="serial-image" src="PM_Seriennummer.png" alt="Position der Seriennummer" /></div>
+        <div class="field"><label for="purchaseDate" data-i18n="purchaseDate">Kaufdatum</label><input id="purchaseDate" name="purchaseDate" type="date" /></div>
+        <div class="field full"><label for="purchaseDocument" data-i18n="purchaseDocument">Kaufbeleg / Garantieschein</label><input id="purchaseDocument" name="purchaseDocument" type="file" accept=".pdf,.jpg,.jpeg,.png" /><p class="hint" data-i18n="fileHint">Erlaubt: PDF, JPG, PNG. Maximal 5 MB.</p></div>
+        <div class="field full"><label for="problemDescription"><span data-i18n="problemDescription">Beschreiben Sie das Problem ausführlich.</span> <span class="required">*</span></label><textarea id="problemDescription" name="problemDescription" required></textarea></div>
+        <div class="field"><label for="previousRepair"><span data-i18n="previousRepair">Wurde die Maschine in der Vergangenheit zur Reparatur eingeschickt?</span> <span class="required">*</span></label><select id="previousRepair" name="previousRepair" required><option value="" data-i18n="choose">Bitte auswählen</option><option value="Ja" data-i18n="yes">Ja</option><option value="Nein" data-i18n="no">Nein</option></select></div>
+        <div class="field full"><label for="previousRepairDate" data-i18n="previousRepairDate">Wenn ja, wann?</label><input id="previousRepairDate" name="previousRepairDate" type="date" /></div>
+        <div class="field full"><label for="repairDocument" data-i18n="repairDocument">Reparaturbeleg</label><input id="repairDocument" name="repairDocument" type="file" accept=".pdf,.jpg,.jpeg,.png" /><p class="hint" data-i18n="fileHint">Erlaubt: PDF, JPG, PNG. Maximal 5 MB.</p></div>
+        <div class="field full"><label for="sameProblem"><span data-i18n="sameProblem">Handelt es sich um dasselbe Problem?</span> <span class="required">*</span></label><select id="sameProblem" name="sameProblem" required><option value="" data-i18n="choose">Bitte auswählen</option><option value="Ja" data-i18n="yes">Ja</option><option value="Nein" data-i18n="no">Nein</option></select></div>
+      </div></section>
+      <section class="section"><h2 data-i18n="repairSection">Abwicklung der Reparatur</h2><div class="grid">
+        <div class="field full"><label for="repairApprovalAmount"><span data-i18n="repairApprovalAmount">Bis zu welchem Betrag können Reparaturen ohne erneute Freigabe durchgeführt werden?</span> <span class="required">*</span></label><input id="repairApprovalAmount" name="repairApprovalAmount" type="text" placeholder="z. B. 100 €" required /><span class="sub-label" data-i18n="outsideWarranty">außerhalb der Garantie</span></div>
+        <div class="field full"><label for="ifExceeded"><span data-i18n="ifExceeded">Bei Überschreitung dieses Betrags bitte ich um:</span> <span class="required">*</span></label><select id="ifExceeded" name="ifExceeded" required><option value="" data-i18n="choose">Bitte auswählen</option><option value="Erstellung eines Kostenvoranschlags" data-i18n="quoteOption">Erstellung eines Kostenvoranschlags</option><option value="Rücksendung des nicht reparierten Produkts" data-i18n="returnOption">Rücksendung des nicht reparierten Produkts</option></select></div>
+      </div><div class="checkbox-group field"><label class="checkbox-item"><input type="checkbox" name="sealConsent" value="Ja" required /><span><span data-i18n="sealConsent">Ich bin damit einverstanden, dass bei einem Siegelbruch oder einem Eingriff durch nicht autorisierte Dritte die vollständigen Reparatur- und Servicekosten anfallen, auch wenn sich die Maschine noch innerhalb des Gewährleistungszeitraums befindet.</span> <span class="required">*</span></span></label><label class="checkbox-item"><input type="checkbox" name="privacyConsent" value="Ja" required /><span><span data-i18n="privacyPrefix">Ich habe die</span> <a href="https://www.smokedeals24.com/policies/privacy-policy" target="_blank" rel="noopener" data-i18n="privacyLink">Informationen zum Datenschutz</a> <span data-i18n="privacySuffix">gelesen und bin damit einverstanden. Mir ist bekannt, dass ich der Verwendung meiner Daten jederzeit widersprechen kann.</span> <span class="required">*</span></span></label></div></section>
+      <div class="hidden-field"><label for="website">Bitte leer lassen</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+      <section class="actions"><button id="submitButton" type="submit" data-i18n="submit">Absenden</button><div id="status" class="status" role="status" aria-live="polite"></div></section>
     </form>
   </main>
-
   <script>
-    const FORM_ENDPOINT = "/.netlify/functions/send-form";
-
-    const form = document.getElementById("returnForm");
-    const button = document.getElementById("submitButton");
-    const statusBox = document.getElementById("status");
-
-    const maxFileSize = 5 * 1024 * 1024;
-    const allowedFileTypes = ["application/pdf", "image/jpeg", "image/png"];
-
-    function showStatus(type, message) {
-      statusBox.className = "status " + type;
-      statusBox.textContent = message;
-    }
-
-    function validateFile(input) {
-      if (!input.files || input.files.length === 0) return true;
-
-      const file = input.files[0];
-
-      if (file.size > maxFileSize) {
-        showStatus("error", "Der Anhang ist zu groß. Maximal 5 MB erlaubt.");
-        input.focus();
-        return false;
-      }
-
-      if (!allowedFileTypes.includes(file.type)) {
-        showStatus("error", "Nur PDF, JPG und PNG sind als Anhang erlaubt.");
-        input.focus();
-        return false;
-      }
-
-      return true;
-    }
-
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      if (!validateFile(document.getElementById("purchaseDocument"))) return;
-      if (!validateFile(document.getElementById("repairDocument"))) return;
-
-      button.disabled = true;
-      button.textContent = "Wird gesendet ...";
-      statusBox.className = "status";
-      statusBox.textContent = "";
-
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          body: formData
-        });
-
-        const result = await response.json().catch(() => ({}));
-
-        if (!response.ok) {
-          throw new Error(result.message || "Formular konnte nicht gesendet werden.");
-        }
-
-        showStatus("success", "Vielen Dank. Ihre Zorr Powermatic Retoure wurde erfolgreich übermittelt.");
-        form.reset();
-      } catch (error) {
-        showStatus("error", error.message || "Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail.");
-      } finally {
-        button.disabled = false;
-        button.textContent = "Absenden";
-      }
-    });
+    const FORM_ENDPOINT="/.netlify/functions/send-form";
+    const translations={
+      de:{htmlLang:"de",pageTitle:"Zorr Powermatic Retoure",languageLabel:"Sprache",title:"Zorr Powermatic Retoure",intro:"Bitte füllen Sie das Formular vollständig aus. Die Angaben helfen uns bei der schnellen Bearbeitung Ihrer Reparatur oder Retoure.",customerSection:"Kundeninformation",customerNumber:"Kundennummer",company:"Firma",firstName:"Vorname",lastName:"Nachname",street:"Straße und Hausnummer",postalCode:"PLZ",city:"Stadt",country:"Land",choose:"Bitte auswählen",austria:"Österreich",germany:"Deutschland",switzerland:"Schweiz",italy:"Italien",other:"Andere",phone:"Telefonnummer",phoneHint:"inkl. Landesvorwahl, z. B. +43 ...",email:"E-Mail",emailHint:"beispiel@beispiel.de",machineSection:"Informationen zur Maschine",machineQuestion:"Um welche Maschine handelt es sich?",serialNumber:"Seriennummer",serialHint:"auf der Unterseite der Maschine",purchaseDate:"Kaufdatum",purchaseDocument:"Kaufbeleg / Garantieschein",fileHint:"Erlaubt: PDF, JPG, PNG. Maximal 5 MB.",problemDescription:"Beschreiben Sie das Problem ausführlich.",previousRepair:"Wurde die Maschine in der Vergangenheit zur Reparatur eingeschickt?",previousRepairDate:"Wenn ja, wann?",repairDocument:"Reparaturbeleg",sameProblem:"Handelt es sich um dasselbe Problem?",yes:"Ja",no:"Nein",repairSection:"Abwicklung der Reparatur",repairApprovalAmount:"Bis zu welchem Betrag können Reparaturen ohne erneute Freigabe durchgeführt werden?",outsideWarranty:"außerhalb der Garantie",ifExceeded:"Bei Überschreitung dieses Betrags bitte ich um:",quoteOption:"Erstellung eines Kostenvoranschlags",returnOption:"Rücksendung des nicht reparierten Produkts",sealConsent:"Ich bin damit einverstanden, dass bei einem Siegelbruch oder einem Eingriff durch nicht autorisierte Dritte die vollständigen Reparatur- und Servicekosten anfallen, auch wenn sich die Maschine noch innerhalb des Gewährleistungszeitraums befindet.",privacyPrefix:"Ich habe die",privacyLink:"Informationen zum Datenschutz",privacySuffix:"gelesen und bin damit einverstanden. Mir ist bekannt, dass ich der Verwendung meiner Daten jederzeit widersprechen kann.",submit:"Absenden",sending:"Wird gesendet ...",success:"Vielen Dank. Ihre Zorr Powermatic Retoure wurde erfolgreich übermittelt.",fileTooLarge:"Der Anhang ist zu groß. Maximal 5 MB erlaubt.",fileTypeError:"Nur PDF, JPG und PNG sind als Anhang erlaubt.",fallbackError:"Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail."},
+      en:{htmlLang:"en",pageTitle:"Zorr Powermatic Return",languageLabel:"Language",title:"Zorr Powermatic Return",intro:"Please complete the form in full. Your details help us process your repair or return quickly.",customerSection:"Customer information",customerNumber:"Customer number",company:"Company",firstName:"First name",lastName:"Last name",street:"Street and house number",postalCode:"Postcode",city:"City",country:"Country",choose:"Please select",austria:"Austria",germany:"Germany",switzerland:"Switzerland",italy:"Italy",other:"Other",phone:"Phone number",phoneHint:"including country code, e.g. +43 ...",email:"Email",emailHint:"example@example.com",machineSection:"Machine information",machineQuestion:"Which machine is it?",serialNumber:"Serial number",serialHint:"on the underside of the machine",purchaseDate:"Purchase date",purchaseDocument:"Proof of purchase / warranty certificate",fileHint:"Allowed: PDF, JPG, PNG. Maximum 5 MB.",problemDescription:"Please describe the problem in detail.",previousRepair:"Has the machine been sent in for repair before?",previousRepairDate:"If yes, when?",repairDocument:"Repair document",sameProblem:"Is it the same problem?",yes:"Yes",no:"No",repairSection:"Repair processing",repairApprovalAmount:"Up to what amount may repairs be carried out without further approval?",outsideWarranty:"outside warranty",ifExceeded:"If this amount is exceeded, I request:",quoteOption:"Preparation of a cost estimate",returnOption:"Return of the unrepaired product",sealConsent:"I agree that in the event of a broken seal or intervention by unauthorized third parties, the full repair and service costs will be charged, even if the machine is still within the warranty period.",privacyPrefix:"I have read the",privacyLink:"privacy information",privacySuffix:"and agree to it. I understand that I can object to the use of my data at any time.",submit:"Submit",sending:"Sending ...",success:"Thank you. Your Zorr Powermatic return has been submitted successfully.",fileTooLarge:"The attachment is too large. Maximum 5 MB allowed.",fileTypeError:"Only PDF, JPG and PNG attachments are allowed.",fallbackError:"An error occurred. Please try again later or contact us directly by email."},
+      fr:{htmlLang:"fr",pageTitle:"Retour Zorr Powermatic",languageLabel:"Langue",title:"Retour Zorr Powermatic",intro:"Veuillez remplir entièrement le formulaire. Vos informations nous aident à traiter rapidement votre réparation ou retour.",customerSection:"Informations client",customerNumber:"Numéro client",company:"Société",firstName:"Prénom",lastName:"Nom",street:"Rue et numéro",postalCode:"Code postal",city:"Ville",country:"Pays",choose:"Veuillez sélectionner",austria:"Autriche",germany:"Allemagne",switzerland:"Suisse",italy:"Italie",other:"Autre",phone:"Téléphone",phoneHint:"avec indicatif pays, par ex. +43 ...",email:"E-mail",emailHint:"exemple@exemple.com",machineSection:"Informations sur la machine",machineQuestion:"De quelle machine s’agit-il ?",serialNumber:"Numéro de série",serialHint:"sur la face inférieure de la machine",purchaseDate:"Date d’achat",purchaseDocument:"Preuve d’achat / certificat de garantie",fileHint:"Autorisé : PDF, JPG, PNG. Maximum 5 Mo.",problemDescription:"Veuillez décrire le problème en détail.",previousRepair:"La machine a-t-elle déjà été envoyée en réparation ?",previousRepairDate:"Si oui, quand ?",repairDocument:"Justificatif de réparation",sameProblem:"S’agit-il du même problème ?",yes:"Oui",no:"Non",repairSection:"Traitement de la réparation",repairApprovalAmount:"Jusqu’à quel montant les réparations peuvent-elles être effectuées sans nouvelle autorisation ?",outsideWarranty:"hors garantie",ifExceeded:"En cas de dépassement de ce montant, je demande :",quoteOption:"Établissement d’un devis",returnOption:"Retour du produit non réparé",sealConsent:"J’accepte qu’en cas de rupture du sceau ou d’intervention par des tiers non autorisés, l’intégralité des frais de réparation et de service soit facturée, même si la machine est encore sous garantie.",privacyPrefix:"J’ai lu les",privacyLink:"informations sur la protection des données",privacySuffix:"et les accepte. Je sais que je peux m’opposer à l’utilisation de mes données à tout moment.",submit:"Envoyer",sending:"Envoi ...",success:"Merci. Votre retour Zorr Powermatic a été transmis avec succès.",fileTooLarge:"La pièce jointe est trop volumineuse. Maximum 5 Mo.",fileTypeError:"Seuls les fichiers PDF, JPG et PNG sont autorisés.",fallbackError:"Une erreur s’est produite. Veuillez réessayer plus tard ou nous contacter directement par e-mail."},
+      es:{htmlLang:"es",pageTitle:"Devolución Zorr Powermatic",languageLabel:"Idioma",title:"Devolución Zorr Powermatic",intro:"Complete el formulario en su totalidad. Sus datos nos ayudan a procesar rápidamente su reparación o devolución.",customerSection:"Información del cliente",customerNumber:"Número de cliente",company:"Empresa",firstName:"Nombre",lastName:"Apellido",street:"Calle y número",postalCode:"Código postal",city:"Ciudad",country:"País",choose:"Seleccione",austria:"Austria",germany:"Alemania",switzerland:"Suiza",italy:"Italia",other:"Otro",phone:"Teléfono",phoneHint:"incluido prefijo internacional, p. ej. +43 ...",email:"Correo electrónico",emailHint:"ejemplo@ejemplo.com",machineSection:"Información de la máquina",machineQuestion:"¿De qué máquina se trata?",serialNumber:"Número de serie",serialHint:"en la parte inferior de la máquina",purchaseDate:"Fecha de compra",purchaseDocument:"Comprobante de compra / garantía",fileHint:"Permitido: PDF, JPG, PNG. Máximo 5 MB.",problemDescription:"Describa el problema detalladamente.",previousRepair:"¿La máquina ya fue enviada anteriormente para reparación?",previousRepairDate:"En caso afirmativo, ¿cuándo?",repairDocument:"Comprobante de reparación",sameProblem:"¿Se trata del mismo problema?",yes:"Sí",no:"No",repairSection:"Gestión de la reparación",repairApprovalAmount:"¿Hasta qué importe pueden realizarse reparaciones sin nueva autorización?",outsideWarranty:"fuera de garantía",ifExceeded:"Si se supera este importe, solicito:",quoteOption:"Elaboración de un presupuesto",returnOption:"Devolución del producto sin reparar",sealConsent:"Acepto que, en caso de rotura del precinto o intervención de terceros no autorizados, se cobren todos los costes de reparación y servicio, aunque la máquina aún esté dentro del periodo de garantía.",privacyPrefix:"He leído la",privacyLink:"información sobre protección de datos",privacySuffix:"y la acepto. Sé que puedo oponerme al uso de mis datos en cualquier momento.",submit:"Enviar",sending:"Enviando ...",success:"Gracias. Su devolución Zorr Powermatic se ha enviado correctamente.",fileTooLarge:"El archivo adjunto es demasiado grande. Máximo 5 MB.",fileTypeError:"Solo se permiten archivos PDF, JPG y PNG.",fallbackError:"Se ha producido un error. Inténtelo de nuevo más tarde o contáctenos directamente por correo electrónico."},
+      nl:{htmlLang:"nl",pageTitle:"Zorr Powermatic retour",languageLabel:"Taal",title:"Zorr Powermatic retour",intro:"Vul het formulier volledig in. Uw gegevens helpen ons uw reparatie of retour snel te verwerken.",customerSection:"Klantinformatie",customerNumber:"Klantnummer",company:"Bedrijf",firstName:"Voornaam",lastName:"Achternaam",street:"Straat en huisnummer",postalCode:"Postcode",city:"Plaats",country:"Land",choose:"Selecteer",austria:"Oostenrijk",germany:"Duitsland",switzerland:"Zwitserland",italy:"Italië",other:"Andere",phone:"Telefoonnummer",phoneHint:"inclusief landcode, bijv. +43 ...",email:"E-mail",emailHint:"voorbeeld@voorbeeld.com",machineSection:"Machine-informatie",machineQuestion:"Om welke machine gaat het?",serialNumber:"Serienummer",serialHint:"aan de onderzijde van de machine",purchaseDate:"Aankoopdatum",purchaseDocument:"Aankoopbewijs / garantiebewijs",fileHint:"Toegestaan: PDF, JPG, PNG. Maximaal 5 MB.",problemDescription:"Beschrijf het probleem uitgebreid.",previousRepair:"Is de machine eerder ter reparatie opgestuurd?",previousRepairDate:"Zo ja, wanneer?",repairDocument:"Reparatiebewijs",sameProblem:"Gaat het om hetzelfde probleem?",yes:"Ja",no:"Nee",repairSection:"Afhandeling van de reparatie",repairApprovalAmount:"Tot welk bedrag mogen reparaties zonder nieuwe goedkeuring worden uitgevoerd?",outsideWarranty:"buiten garantie",ifExceeded:"Bij overschrijding van dit bedrag verzoek ik om:",quoteOption:"Opstellen van een kostenraming",returnOption:"Terugzending van het niet-gerepareerde product",sealConsent:"Ik ga ermee akkoord dat bij een verbroken zegel of ingreep door onbevoegde derden de volledige reparatie- en servicekosten in rekening worden gebracht, ook als de machine nog binnen de garantieperiode valt.",privacyPrefix:"Ik heb de",privacyLink:"informatie over gegevensbescherming",privacySuffix:"gelezen en ga hiermee akkoord. Ik weet dat ik op elk moment bezwaar kan maken tegen het gebruik van mijn gegevens.",submit:"Verzenden",sending:"Wordt verzonden ...",success:"Bedankt. Uw Zorr Powermatic retour is succesvol verzonden.",fileTooLarge:"De bijlage is te groot. Maximaal 5 MB toegestaan.",fileTypeError:"Alleen PDF-, JPG- en PNG-bestanden zijn toegestaan.",fallbackError:"Er is een fout opgetreden. Probeer het later opnieuw of neem rechtstreeks per e-mail contact met ons op."}
+    };
+    const form=document.getElementById("returnForm"),button=document.getElementById("submitButton"),statusBox=document.getElementById("status"),languageSelect=document.getElementById("languageSelect"),formLanguage=document.getElementById("formLanguage");
+    const maxFileSize=5*1024*1024,allowedFileTypes=["application/pdf","image/jpeg","image/png"];
+    function current(){return translations[languageSelect.value]||translations.de}
+    function applyLanguage(lang){const t=translations[lang]||translations.de;document.documentElement.lang=t.htmlLang;document.title=t.pageTitle;formLanguage.value=lang.toUpperCase();document.querySelectorAll("[data-i18n]").forEach(el=>{const key=el.getAttribute("data-i18n");if(t[key])el.textContent=t[key]});button.textContent=t.submit;localStorage.setItem("zorrFormLanguage",lang)}
+    function showStatus(type,message){statusBox.className="status "+type;statusBox.textContent=message}
+    function validateFile(input){const t=current();if(!input.files||input.files.length===0)return true;const file=input.files[0];if(file.size>maxFileSize){showStatus("error",t.fileTooLarge);input.focus();return false}if(!allowedFileTypes.includes(file.type)){showStatus("error",t.fileTypeError);input.focus();return false}return true}
+    languageSelect.addEventListener("change",()=>applyLanguage(languageSelect.value));const saved=localStorage.getItem("zorrFormLanguage");if(saved&&translations[saved])languageSelect.value=saved;applyLanguage(languageSelect.value);
+    form.addEventListener("submit",async event=>{event.preventDefault();const t=current();if(!form.checkValidity()){form.reportValidity();return}if(!validateFile(document.getElementById("purchaseDocument")))return;if(!validateFile(document.getElementById("repairDocument")))return;button.disabled=true;button.textContent=t.sending;statusBox.className="status";statusBox.textContent="";try{const response=await fetch(FORM_ENDPOINT,{method:"POST",body:new FormData(form)});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.message||"Formular konnte nicht gesendet werden.");showStatus("success",t.success);form.reset();applyLanguage(languageSelect.value)}catch(error){showStatus("error",error.message||t.fallbackError)}finally{button.disabled=false;button.textContent=t.submit}});
   </script>
 </body>
 </html>
